@@ -2,7 +2,7 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-04-14 19:36:35
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-04-25 15:52:33
+ * @LastEditTime: 2022-04-25 16:19:01
  * @Description:
  */
 
@@ -34,4 +34,36 @@ export const useDebounce = <V>(value: V, delay) => {
   }, [value, delay]);
 
   return debouncedValue;
+};
+
+/**
+ * 数组操作 hook
+ * @param arr
+ * @returns
+ */
+export const useArray = <V>(arr: V[]) => {
+  const [value, setValue] = useState(arr);
+
+  const clear = () => {
+    setValue([]);
+  };
+
+  const removeIndex = (index: number) => {
+    value.splice(index, 1);
+    const temp = [...value];
+    setValue(temp);
+  };
+
+  const add = (item: V) => {
+    value.push(item);
+    const temp = [...value];
+    setValue(temp);
+  };
+
+  return {
+    value,
+    clear,
+    removeIndex,
+    add,
+  };
 };
