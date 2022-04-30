@@ -2,41 +2,14 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-04-30 10:30:42
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-04-30 10:50:48
+ * @LastEditTime: 2022-04-30 16:20:15
  * @Description:
  */
+import { useAuth } from "context/auth-context";
 import React, { FormEvent } from "react";
-// import { cleanObject } from "utils";
-
-// interface Base {
-//   id: number
-// }
-//
-// interface Advance extends Base {
-//   name: string
-// }
-//
-// const test = (p: Base) => {
-// }
-//
-// // 鸭子类型(duck typing)：面向接口编程 而不是 面向对象编程
-// const a = {id: 1, name: 'jack'}
-// test(a)
-const apiUrl = process.env.REACT_APP_API_URL;
 
 export const LoginScreen = () => {
-  const login = (param: { username: string; password: string }) => {
-    fetch(`${apiUrl}/login`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(param),
-    }).then(async (response) => {
-      if (response.ok) {
-      }
-    });
-  };
+  const { user, login } = useAuth();
 
   // HTMLFormElement extends Element
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -50,6 +23,7 @@ export const LoginScreen = () => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {user ? <div>登录成功，用户名为{user.name}</div> : ""}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id={"username"} />
@@ -58,7 +32,7 @@ export const LoginScreen = () => {
         <label htmlFor="password">密码</label>
         <input type="password" id={"password"} />
       </div>
-      <button type={"submit"}>登录</button>
+      <button type={"submit"}>注册</button>
     </form>
   );
 };

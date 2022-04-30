@@ -2,7 +2,7 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-04-30 10:30:42
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-04-30 11:20:29
+ * @LastEditTime: 2022-04-30 15:52:36
  * @Description:
  */
 import React from "react";
@@ -14,6 +14,7 @@ export interface User {
   email: string;
   title: string;
   organization: string;
+  token: string;
 }
 
 export interface SearchPanelProps {
