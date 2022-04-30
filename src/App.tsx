@@ -2,18 +2,20 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-04-09 21:30:12
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-04-25 16:47:56
+ * @LastEditTime: 2022-04-30 16:39:47
  * @Description:
  */
 import React from "react";
 import "./App.css";
-import { TsReactTest } from "./test/try-use-array";
-import { LoginScreen } from "./pages/login/index";
+import { useAuth } from "context/auth-context";
+import AuthenticatedApp from "authenticated-app";
+import { UnauthenticatedApp } from "unauthenticated-app";
 
 function App() {
+  const { user } = useAuth();
   return (
     <div className="App">
-      <LoginScreen />
+      {user ? <AuthenticatedApp /> : <UnauthenticatedApp />}
     </div>
   );
 }

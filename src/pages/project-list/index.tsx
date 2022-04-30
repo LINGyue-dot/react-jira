@@ -1,13 +1,16 @@
+/*
+ * @Author: qianlong github:https://github.com/LINGyue-dot
+ * @Date: 2022-04-30 10:30:42
+ * @LastEditors: qianlong github:https://github.com/LINGyue-dot
+ * @LastEditTime: 2022-04-30 17:23:11
+ * @Description:
+ */
 import React from "react";
 import { SearchPanel } from "pages/project-list/search-panel";
 import { List } from "pages/project-list/list";
 import { useEffect, useState } from "react";
 import { useDebounce, useMount } from "../../utils";
-import * as qs from "qs";
-
-// 使用 JS 的同学，大部分的错误都是在 runtime(运行时) 的时候发现的
-// 我们希望，在静态代码中，就能找到其中的一些错误 -> 强类型
-const apiUrl = process.env.REACT_APP_API_URL;
+import { useHttp } from "utils/http";
 
 export const ProjectListScreen = () => {
   const [users, setUsers] = useState([]);
@@ -19,21 +22,17 @@ export const ProjectListScreen = () => {
   const debouncedParam = useDebounce(param, 200);
   const [list, setList] = useState([]);
 
+  const client = useHttp();
+
   useEffect(() => {
-    fetch(`${apiUrl}/projects?${qs.stringify(debouncedParam)}`).then(
-      async (response) => {
-        if (response.ok) {
-          setList(await response.json());
-        }
-      }
-    );
+    client("projects", { data: debouncedParam }).then(async (response) => {
+      setList(response);
+    });
   }, [debouncedParam]);
 
   useMount(() => {
-    fetch(`${apiUrl}/users`).then(async (response) => {
-      if (response.ok) {
-        setUsers(await response.json());
-      }
+    client("users").then((response) => {
+      setUsers(response);
     });
   });
 

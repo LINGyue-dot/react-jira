@@ -2,7 +2,7 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-04-09 21:30:12
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-04-25 16:44:28
+ * @LastEditTime: 2022-04-30 16:30:05
  * @Description:
  */
 import React from "react";
@@ -12,11 +12,14 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
 import { loadDevTools } from "jira-dev-tool";
+import AppContext from "context";
 
 loadDevTools(() =>
   ReactDOM.render(
     <React.StrictMode>
-      <App />
+      <AppContext>
+        <App />
+      </AppContext>
     </React.StrictMode>,
     document.getElementById("root")
   )

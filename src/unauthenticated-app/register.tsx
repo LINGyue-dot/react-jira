@@ -2,14 +2,14 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-04-30 10:30:42
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-04-30 16:20:15
+ * @LastEditTime: 2022-04-30 16:40:51
  * @Description:
  */
 import { useAuth } from "context/auth-context";
 import React, { FormEvent } from "react";
 
-export const LoginScreen = () => {
-  const { user, login } = useAuth();
+export const RegisterScreen = () => {
+  const { user, register } = useAuth();
 
   // HTMLFormElement extends Element
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -18,12 +18,11 @@ export const LoginScreen = () => {
       .value;
     const password = (event.currentTarget.elements[1] as HTMLInputElement)
       .value;
-    login({ username, password });
+    register({ username, password });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      {user ? <div>登录成功，用户名为{user.name}</div> : ""}
       <div>
         <label htmlFor="username">用户名</label>
         <input type="text" id={"username"} />
